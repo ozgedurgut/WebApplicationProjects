@@ -10,6 +10,7 @@ namespace WebApplication.Controllers
     public class HomeController : Controller
     {
         // Controller sınıfları içerisinde istekleri karşılayan metotlara action metot denir.
+        //
         public IActionResult Index()
         {
             return View();
