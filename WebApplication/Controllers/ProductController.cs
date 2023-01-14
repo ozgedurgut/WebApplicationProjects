@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using WebApplication.Models;
+using WebApplication.Models.ViewModels;
 
 namespace WebApplication.Controllers
 {
@@ -36,6 +37,34 @@ namespace WebApplication.Controllers
             return View();
         }
 
+        public IActionResult GetProducts() 
+        {
+            Product product = new Product
+            {
+                Id = 1,
+                ProductName = "Product A",
+                Quantity = 18
+            };
+            User user = new User()
+            {
+                Id = 1,
+                Name = "Ozge",
+                Surname = "Durgut"
+            };
+            /*
+            UserProduct userProduct = new UserProduct
+            {
+                User = user,
+                Product = product
+            };
+            */
+
+            var userProduct = (product, user);
+
+            return View(userProduct);
+        }
+
+        /*
         public IActionResult GetProducts()
         {
             Product product = new Product();
@@ -48,7 +77,7 @@ namespace WebApplication.Controllers
             //return View();
             // view fonksiyonu bu actiona ait view(.cshtml) dosyasını tetikleyecektir.
         }
-
+        */
         public JsonResult JsonProducts()
         {
             JsonResult result = Json(new Product
