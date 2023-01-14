@@ -5,7 +5,5 @@ using System.Threading.Tasks;
 
 namespace GetUserInputs.Models
 {
-    public class Product
-    {
-    }
+
 }

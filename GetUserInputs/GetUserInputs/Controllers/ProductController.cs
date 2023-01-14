@@ -7,6 +7,11 @@ using System.Threading.Tasks;
 
 namespace GetUserInputs.Controllers
 {
+    public class QueryProduct
+    {
+        public string A { get; set; }
+        public string B { get; set; }
+    }
     public class Model 
     { 
         public string txtValue1 { get; set; }
@@ -24,6 +29,15 @@ namespace GetUserInputs.Controllers
         [HttpPost]
         public IActionResult GetProduct(Model model)
         {
+            return View();
+        }
+        public IActionResult TakeProduct(QueryProduct data)
+        {
+            /*
+            var quearyString = Request.QueryString;
+            var a = Request.Query["a"].ToString();
+            var b = Request.Query["b"].ToString();
+            */
             return View();
         }
     }
