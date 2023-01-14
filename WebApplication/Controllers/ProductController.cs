@@ -2,13 +2,40 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using WebApplication.Models;
 
 namespace WebApplication.Controllers
 {
+    // controllerlar gelen requestları karşılar, actionlar ise bu requestler gereği gerekli operasyonları tetikleyen fonksiyonlardır.
     public class ProductController : Controller
     {
+        public IActionResult ListProducts() {
+            var products = new List<Product>
+            {
+                new Product{Id = 1, ProductName = "Product A", Quantity = 10},
+                new Product{Id = 2, ProductName = "Product B", Quantity = 15},
+                new Product{Id = 3, ProductName = "Product C", Quantity = 20}
+            };
+           // ViewData["products"] = products;
+
+            string data = JsonSerializer.Serialize(products);
+            TempData["products"] = data;
+
+            return RedirectToAction("Index2","Product"); 
+        }
+
+        public IActionResult Index2() {
+            //var v1 = ViewBag.products;
+            //var v2 = ViewData["products"];
+            //var v3 = TempData["products"];
+
+            var data = TempData["products"].ToString();
+            List<Product> products = JsonSerializer.Deserialize<List<Product>>(data);
+            return View();
+        }
+
         public IActionResult GetProducts()
         {
             Product product = new Product();
@@ -22,6 +49,16 @@ namespace WebApplication.Controllers
             // view fonksiyonu bu actiona ait view(.cshtml) dosyasını tetikleyecektir.
         }
 
+        public JsonResult JsonProducts()
+        {
+            JsonResult result = Json(new Product
+            {
+                Id = 8,
+                ProductName = "Necklace",
+                Quantity = 25,
+            });
+            return result;
+        }
         /////////////////////////////////////////////
         /*
         public ViewResult GetProducts() {
@@ -38,18 +75,8 @@ namespace WebApplication.Controllers
             return result;
         }*/
         /////////////////////////////////////////////
-        /*
-        public JsonResult JsonProducts()
-        {
-            JsonResult result = Json(new Product 
-            { 
-                Id=8,
-                ProductName = "Necklace",
-                Quantity = 25,
-            });
-            return result;
-        }
-        */
+
+
         ////////////////////////////////////////////
         /*
         public EmptyResult GetProducts()
