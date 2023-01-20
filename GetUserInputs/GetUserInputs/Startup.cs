@@ -18,7 +18,7 @@ namespace GetUserInputs
         {
             services.AddControllersWithViews();
         }
-
+        
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -26,7 +26,7 @@ namespace GetUserInputs
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseStaticFiles();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
@@ -36,6 +36,9 @@ namespace GetUserInputs
                     await context.Response.WriteAsync("Hello World!");
                 });*/
                 endpoints.MapDefaultControllerRoute();
+
+                endpoints.MapControllerRoute("CustomRoute","{controller=Home}/{action=Index}/{a}/{b}/{index}");
+                //                                         home/index/ozge/hulya/25
             });
         }
     }
