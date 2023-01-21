@@ -59,15 +59,19 @@ namespace GetUserInputs.Controllers
         }
         */
 
-        
+        /*
         public IActionResult GetProduct(RouteData datas)
         {
             var values = Request.RouteValues;
             return View();
         }
-        
+        */
 
-  
+        public IActionResult GetProduct()
+        {
+            var headers = Request.Headers.ToList();
+            return View();
+        }
 
     }
 }
